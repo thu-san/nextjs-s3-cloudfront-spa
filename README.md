@@ -1,5 +1,7 @@
 # Next.js S3 CloudFront SPA Demo
 
+[English](README.md) | [日本語](README.ja.md)
+
 # 💰💰💰 ZERO CLOUDFRONT FUNCTIONS = MAXIMUM COST SAVINGS 💰💰💰
 
 ## 🚫 NO Lambda@Edge 🚫 NO CloudFront Functions 🚫 NO Function Costs
