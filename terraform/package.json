@@ -1,0 +1,23 @@
+{
+  "name": "nextjs-s3-cloudfront-spa",
+  "version": "1.0.0",
+  "description": "OpenTofu infrastructure for nextjs-s3-cloudfront-spa",
+  "scripts": {
+    "dev:init": "cd environments/dev && terragrunt init",
+    "dev:init:reconfigure": "cd environments/dev && terragrunt init -reconfigure",
+    "dev:init:migrate": "cd environments/dev && terragrunt init -migrate-state",
+    "dev:plan": "cd environments/dev && terragrunt plan",
+    "dev:apply": "cd environments/dev && terragrunt apply",
+    "dev:destroy": "cd environments/dev && terragrunt destroy",
+    "fmt": "tofu fmt -recursive && terragrunt hclfmt",
+    "dev:validate": "cd environments/dev && terragrunt validate"
+  },
+  "keywords": [
+    "opentofu",
+    "terragrunt",
+    "aws",
+    "infrastructure"
+  ],
+  "author": "",
+  "license": "ISC"
+}
