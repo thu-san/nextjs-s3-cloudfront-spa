@@ -9,6 +9,11 @@ export default function Header() {
   const navLinks = [
     { href: '/', label: 'Home', color: 'bg-gray-100 hover:bg-gray-200' },
     {
+      href: '/blog',
+      label: 'Blog',
+      color: 'bg-indigo-100 hover:bg-indigo-200',
+    },
+    {
       href: '/trailing-slash/',
       label: 'Trailing Slash /',
       color: 'bg-green-100 hover:bg-green-200',

@@ -39,8 +39,8 @@ mkdir -p tmp
 # Copy all HTML files from out to the temporary directory, preserving structure
 rsync -a --prune-empty-dirs --include='*/' --include='*.html' --exclude='*' out/ tmp/
 
-# Create copies of HTML files without .html extension (keep both versions)
-find tmp -name "*.html" -type f -exec sh -c 'cp "$0" "${0%.html}"' {} \;
+# Create copies of HTML files without .html extension (keep both versions) - don't copy html files that have directory counterparts as extensionless routes (e.g., blog.html → /blog when blog/ exists)
+find tmp -name "*.html" -type f -exec sh -c '[ ! -d "${1%.html}" ] && cp "$1" "${1%.html}"' sh {} \;
 
 # Upload normal files first
 echo "📤 Uploading static assets..."
@@ -56,6 +56,9 @@ rsync -abviuzP tmp/ out/
 # Sync again with delete flag to remove any obsolete files
 echo "🧹 Cleaning up obsolete files..."
 aws s3 sync out s3://$S3_BUCKET_NAME --delete
+
+# Upload HTML files that have directory counterparts as extensionless routes (e.g., blog.html → /blog when blog/ exists)
+find tmp -type d -exec sh -c '[ -f "$1.html" ] && aws s3 cp "$1.html" "s3://$2/${1#tmp/}" --content-type "text/html" --cache-control "must-revalidate"' sh {} $S3_BUCKET_NAME \;
 
 # Clean up the temporary directory
 rm -rf tmp
